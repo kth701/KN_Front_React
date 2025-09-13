@@ -7,6 +7,11 @@ const Loading = <div>Loading....</div>
 
 const Main = lazy(()=> import("../pages/MainPage"))
 const About = lazy(  () => import("../pages/AboutPage"))
+const TodoIndex = lazy( () => import("../pages/todo/IndexPage"))
+const TodoList = lazy( () => import("../pages/todo/LIstPage"))
+
+
+
 
 const root = createBrowserRouter([ // 주소(url) 와 페이지 맵핑
     {
@@ -17,6 +22,20 @@ const root = createBrowserRouter([ // 주소(url) 와 페이지 맵핑
     {
         path:"about",
         element: <Suspense fallback={Loading}><About /></Suspense>
+    },
+
+    {
+        path: "todo", // "/todo/list" -> TodoList.jsx 연결
+        element: <Suspense fallback={Loading}><TodoIndex /></Suspense>,
+
+        children:[
+            {
+                path:"list",
+                element: <Suspense fallback={Loading}><TodoList /></Suspense>
+            },
+        ]
+
+                
     }
     
 
