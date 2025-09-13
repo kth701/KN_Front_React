@@ -1,0 +1,19 @@
+ 1. yarn create vite 프로젝트명 --template react (or react-ts)
+ 2. cd 프로젝트명
+ 3. yarn  =>(라이브러이 설치)
+ 4. yarn dev => (서버 실행)
+
+스타일시트 설치
+5. npm install tailwindcss @tailwindcss/vite
+
+6. vite.config.ts 수정
+    import { defineConfig } from 'vite'
+    import tailwindcss from '@tailwindcss/vite'// 추가
+
+    export default defineConfig({
+    plugins: [
+        tailwindcss(),// 추가
+    ],
+    })
+7. index.css 수정
+@import "tailwindcss";
