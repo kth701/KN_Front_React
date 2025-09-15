@@ -6,7 +6,8 @@ const IndexPage = () => {
 
     const handleClickList = () => {
         console.log("LIST click...")
-        navigate({pathname: "list"}) // 상대 경로로 이동
+        // 페이지 이동 => 상대 경로로 이동(현재 경로 위치에 이동)
+        navigate({pathname: "list"}) // "todo/list" 설정된다.
     }
 
 

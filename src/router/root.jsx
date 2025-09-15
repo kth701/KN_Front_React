@@ -1,6 +1,7 @@
 
 import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom"; // jsx 인식
+import todoRouter from "./todoRouter";
 // const {createBrowserRouter} = require("react-router-dom") // js인식
 
 const Loading = <div>Loading....</div>
@@ -20,7 +21,7 @@ const root = createBrowserRouter([ // 주소(url) 와 페이지 맵핑
     },
 
     {
-        path:"about",
+        path:"about", //  // "http://localhost:5173/about/"
         element: <Suspense fallback={Loading}><About /></Suspense>
     },
 
@@ -28,12 +29,16 @@ const root = createBrowserRouter([ // 주소(url) 와 페이지 맵핑
         path: "todo", // "/todo/list" -> TodoList.jsx 연결
         element: <Suspense fallback={Loading}><TodoIndex /></Suspense>,
 
-        children:[
-            {
-                path:"list",
-                element: <Suspense fallback={Loading}><TodoList /></Suspense>
-            },
-        ]
+        // 하위 메뉴가 있으면 설정 : "/toddo" => "/todod/list", "/todo/add",....
+        // children:[
+        //     {
+        //         path:"list",
+        //         element: <Suspense fallback={Loading}><TodoList /></Suspense>
+        //     },
+        // ]
+
+        // 하위 메뉴 모듈화 에서 연결하기
+         children: todoRouter()
 
                 
     }
