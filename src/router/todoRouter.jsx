@@ -1,6 +1,7 @@
 import { Suspense, lazy } from "react";
 import { Navigate } from "react-router-dom";
-import TodoRead from "../pages/todo/TodoRead";
+import TodoRead from "../pages/todo/ReadPage";
+import AddPage from "../pages/todo/AddPage";
 
 
 const Loading = <div>Loading....</div>
@@ -20,6 +21,10 @@ const todoRouter = () => {
         {
             path: "read/:tno", // "/todo/read/100"
             element: <Suspense fallback={Loading}><TodoRead /></Suspense>
+        },
+        {
+            path: "add",
+            element: <Suspense fallback={Loading}><AddPage /></Suspense>
         }
     ]
 }

@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 
-const TodoRead = () => {
+const ReadPage = () => {
     // url 경로 매개변수 추출
     // "/todo/read/100" => 100을 추출
     const {tno} = useParams();
@@ -12,4 +12,4 @@ const TodoRead = () => {
     )
 }
 
-export default TodoRead;
+export default ReadPage;
