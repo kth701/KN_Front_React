@@ -15,6 +15,7 @@ const ReadPage = () => {
     // page, size값을 이용해서 쿼리 스트링 객체 생성 => "?page=1&size=10"
     const queryStr = createSearchParams({page, size}).toString();
 
+    /* 커스텀 훅에 사용하므로 생략
     // 수정 버튼 클릭 처리하는 함수 선언
     // useCallback(수행함수,[의존성배열])
     const moveToModify = useCallback( (tno)=> {
@@ -33,28 +34,18 @@ const ReadPage = () => {
         const moveToList = useCallback( () => {
             navigate( {pathname:`/todo/list`, search: `?page=${page}&size=${size}`})
         },[page, size] )
+        */
 
                     
     return (
-        <div className="text-3xl">
+        <div className="text-3xl bg-white mt-2 p-4">
             Todo Read Page Component: tno={tno}
 
             <ReadComponent tno={tno} />
             
-            <div onClick={ () => moveToModify(33) }>수정(Modify)</div>
-            <div onClick={ ()=> moveToList()}>목록(List)</div>
-            {/* <div className="flex justify-end p-4">
-                <button type="button" 
-                        className="rounded p-4 m-2 text-xl w-32 text-white bg-blue-500"
-                        onClick={() => moveToModify(tno)}>
-                    Modify
-                </button>
-                <button type="button" 
-                        className="rounded p-4 m-2 text-xl w-32 text-white bg-red-500"
-                        onClick={moveToList}>
-                    List
-                </button>
-            </div> */}
+            {/* <div onClick={ () => moveToModify(33) }>수정(Modify)</div> */}
+            {/* <div onClick={ ()=> moveToList()}>목록(List)</div> */}
+
         </div>
     )
 }

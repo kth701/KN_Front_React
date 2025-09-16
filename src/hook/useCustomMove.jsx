@@ -21,6 +21,7 @@ const useCustomMove = () => {
 
     const queryDefault = createSearchParams({page, size}).toString()// "?page=1&size=10"
 
+    // 1. moveToList()
     const moveToList = (pageParam) => {
         let queryStr= ""
 
@@ -39,10 +40,21 @@ const useCustomMove = () => {
             pathname: `../list`,        // 상대 경로(현재 위치가 => /todo/read)
             search: queryStr            // 페이지 정보를 쿼리스트링으로 전달
         }) 
+       
+    } // end moveToList()
 
-        return { moveToList, page, size}// moveToList()함수, page, size 객체 반환
+    // 2. moveToModify()
+    const moveToModify = (tno) => {
+        const queryStr = createSearchParams({page, size}).toString()
+        navigate( {
+            pathname: `../modify/${tno}`,
+            search: queryStr //=> "/todo/modify/100?page=1&size=10"
+        })
     }
 
+
+
+     return { moveToList, moveToModify, page, size}// moveToList()함수, page, size 객체 반환
 
 }
 export default useCustomMove;
