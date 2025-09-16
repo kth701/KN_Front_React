@@ -32,38 +32,22 @@ const ReadComponent = ({tno}) =>{
             [tno]) // tno변경될 때, 서버에 요청하는 함수
 
     return ( 
-        <div className="border-2 border-gray-200 mt-10 m-2 p-4 rounded-lg shadow-lg">
-            <div className="flex justify-center">
-                <div className="relative mb-4 flex w-full flex-wrap items-stretch">
-                    <div className="w-1/5 p-2 text-right font-bold">TNO</div>
-                    <div className="w-4/5 p-2 rounded-r border border-solid border-neutral-300 shadow-inner">{todo.tno}</div>
-                </div>
-            </div>
-            <div className="flex justify-center">
-                <div className="relative mb-4 flex w-full flex-wrap items-stretch">
-                    <div className="w-1/5 p-2 text-right font-bold">WRITER</div>
-                    <div className="w-4/5 p-2 rounded-r border border-solid border-neutral-300 shadow-inner">{todo.writer}</div>
-                </div>
-            </div>
-            <div className="flex justify-center">
-                <div className="relative mb-4 flex w-full flex-wrap items-stretch">
-                    <div className="w-1/5 p-2 text-right font-bold">TITLE</div>
-                    <div className="w-4/5 p-2 rounded-r border border-solid border-neutral-300 shadow-inner">{todo.title}</div>
-                </div>
-            </div>
-            <div className="flex justify-center">
-                <div className="relative mb-4 flex w-full flex-wrap items-stretch">
-                    <div className="w-1/5 p-2 text-right font-bold">DUEDATE</div>
-                    <div className="w-4/5 p-2 rounded-r border border-solid border-neutral-300 shadow-inner">{todo.dueDate}</div>
-                </div>
-            </div>
-            <div className="flex justify-center">
-                <div className="relative mb-4 flex w-full flex-wrap items-stretch">
-                    <div className="w-1/5 p-2 text-right font-bold">COMPLETE</div>
-                    <div className="w-4/5 p-2 rounded-r border border-solid border-neutral-300 shadow-inner">{todo.complete ? 'Completed' : 'Not Yet'}</div>
-                </div>
-            </div>
+        <div className="border-1 border-wky-200 mt-10 p-4 m-4">
+            {makeDiv('Tno', todo.tno)}
+            {makeDiv('Title', todo.title)}
+            {makeDiv('Writer', todo.writer)}
+            {makeDiv('DueDate', todo.dueDate)}
         </div>
+
     )
 }
+
+
+const makeDiv = (title, value) => 
+    <div className="flelx justify-center">
+        <div className="relative mb-4 flex w-full flex-wrap items-stretch">
+            <div className="w-1/5 p-6 text-right font-bold">{title}</div>
+            <div className="w-4/5 p-6 rounded-r border border-solid shadow-md">{value}</div>
+        </div>
+    </div>
 export default ReadComponent;
