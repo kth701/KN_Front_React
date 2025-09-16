@@ -35,14 +35,24 @@ const ReadPage = () => {
 
                     
     return (
-        <div>
-            <div>Todo Read Page Component: tno={tno}</div>
+        <div className="text-3xl">
+            Todo Read Page Component: tno={tno}
             
             <div onClick={ () => moveToModify(33) }>수정(Modify)</div>
             <div onClick={ ()=> moveToList()}>목록(List)</div>
-
+            {/* <div className="flex justify-end p-4">
+                <button type="button" 
+                        className="rounded p-4 m-2 text-xl w-32 text-white bg-blue-500"
+                        onClick={() => moveToModify(tno)}>
+                    Modify
+                </button>
+                <button type="button" 
+                        className="rounded p-4 m-2 text-xl w-32 text-white bg-red-500"
+                        onClick={moveToList}>
+                    List
+                </button>
+            </div> */}
         </div>
-        
     )
 }
 
