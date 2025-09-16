@@ -1,5 +1,6 @@
 import { use, useCallback } from "react";
 import { createSearchParams, useNavigate, useParams, useSearchParams } from "react-router-dom";
+import ReadComponent from "../../components/todo/ReadComponent";
 
 const ReadPage = () => {
     // url 경로 매개변수 추출
@@ -37,6 +38,8 @@ const ReadPage = () => {
     return (
         <div className="text-3xl">
             Todo Read Page Component: tno={tno}
+
+            <ReadComponent tno={tno} />
             
             <div onClick={ () => moveToModify(33) }>수정(Modify)</div>
             <div onClick={ ()=> moveToList()}>목록(List)</div>
