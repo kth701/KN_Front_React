@@ -16,7 +16,7 @@ export const getList =  async (pageParam) => {
     const { page, size }= pageParam // 페이지 정보
     //const res = await axios.get(`${base}?page=${page}&size=${size}`)// 서버에 목록 요청
     const res = await axios.get(
-            `${base}`, // 서버에 요청할 url
+            `${base}/list`, // 서버에 요청할 url=> /api/v1/todos/list
             {               // 서버에 전달할 파라미터
                 params : {page, size} 
             }

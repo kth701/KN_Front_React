@@ -52,9 +52,25 @@ const useCustomMove = () => {
         })
     }
 
+    // 3. moveToRead()
+    const moveToRead = (tno) => {
+        const queryStr = createSearchParams({page, size}).toString()
+        navigate({
+            pathname: `../read/${tno}`,
+            search: queryStr
+        })
+    }
+    // 4. moveToAdd()    
 
 
-     return { moveToList, moveToModify, page, size}// moveToList()함수, page, size 객체 반환
+    // 페이지 이동 처리
+    // 5. moveToLogin()
+    // 6. moveToMain()
+    // 7.moveToBack()
+
+
+
+     return { moveToList, moveToModify, moveToRead, page, size}// moveToList()함수, page, size 객체 반환
 
 }
 export default useCustomMove;

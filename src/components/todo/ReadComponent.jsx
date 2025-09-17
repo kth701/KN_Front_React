@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { getOne } from "../../api/TodoApi";
 import useCustomMove from "../../hook/useCustomMove";
 
+//  서버에서 전달 받은 todoDTO 객체 -> initState객체 저장
 const initState = {
     tno:0,
     title:'',
@@ -33,11 +34,12 @@ const ReadComponent = ({tno}) =>{
                     }) 
                 }
             },
-            [tno]) // tno변경될 때, 서버에 요청하는 함수
+            [tno]) // tno변경될 때, 서버에 요청하는 비동기 처리함수 수행
 
     return ( 
         <>
             <div className="border-1 border-sky-200 mt-10 p-4 m-4">
+                {/* 반복되는 태그 생성을 makeDiv()함수에 처리 */}
                 {makeDiv('Tno', todo.tno)}
                 {makeDiv('Title', todo.title)}
                 {makeDiv('Writer', todo.writer)}
