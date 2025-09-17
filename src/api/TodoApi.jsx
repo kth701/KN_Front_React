@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // 서버 주소와 기본 경로 설정
-const host = "http://localhost:8099";
+export const host = "http://localhost:8099";
 const base = `${host}/api/v1/todos`;
 
 // todo에서 특정 tno에대한 조회
@@ -23,4 +23,11 @@ export const getList =  async (pageParam) => {
             )// 서버에 목록 요청
 
     return res.data
+}
+
+// 등록
+export const postAdd = async(todoObj) => {
+    const res = await axios.post(`${base}/`, todoObj)
+    return res.data
+
 }

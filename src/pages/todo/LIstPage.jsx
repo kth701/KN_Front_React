@@ -18,6 +18,7 @@ const ListPage = () => {
             <div className="text-3xl">
                 Todo List Page Component : page={page}, size={size}
             </div>
+            
             <ListComponent />
         </div>
     )

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useCustomMove from "../../hook/useCustomMove";
 import { getList } from "../../api/TodoApi";
+import PageComponent from "../menus/PageComponent";
 
 // 페이지 정보담는 객체(PageResponseDTO)
 const initState = {
@@ -55,24 +56,25 @@ const ListComponent = () => {
                 )}
             </div>
 
-            {/* 페이지네이션 */}
-            <div className="flex justify-center p-4">
-                <ul className="flex">
-                    {pageResponseDTO.prev &&
-                        <li className="p-2 m-2 cursor-pointer" onClick={() => moveToList({page: pageResponseDTO.prevPage})}> PREV </li>
-                    }
-                    {pageResponseDTO.pageNumList.map(pageNum =>
-                        <li key={pageNum}
-                            className={`p-2 m-2 cursor-pointer ${pageResponseDTO.current === pageNum ? 'text-red-500' : ''}`}
-                            onClick={() => moveToList({page: pageNum})}>
-                            {pageNum}
-                        </li>
-                    )}
-                    {pageResponseDTO.next &&
-                        <li className="p-2 m-2 cursor-pointer" onClick={() => moveToList({page: pageResponseDTO.nextPage})}> NEXT </li>
-                    }
-                </ul>
-            </div>
+            {/* 페이지네이션 - 주석 처리
+             <div className="flex justify-center p-4">
+                 <ul className="flex">
+                     {pageResponseDTO.prev &&
+                         <li className="p-2 m-2 cursor-pointer" onClick={() => moveToList({page: pageResponseDTO.prevPage})}> PREV </li>
+                     }
+                     {pageResponseDTO.pageNumList.map(pageNum =>
+                         <li key={pageNum}
+                             className={`p-2 m-2 cursor-pointer ${pageResponseDTO.current === pageNum ? 'text-red-500' : ''}`}
+                             onClick={() => moveToList({page: pageNum})}>
+                             {pageNum}
+                         </li>
+                     )}
+                     {pageResponseDTO.next &&
+                         <li className="p-2 m-2 cursor-pointer" onClick={() => moveToList({page: pageResponseDTO.nextPage})}> NEXT </li>
+                     }
+                 </ul>
+             </div> */}
+            <PageComponent serverData={pageResponseDTO} movePage={moveToList}></PageComponent>
         </div>
     )
 }
