@@ -38,14 +38,12 @@ const ReadPage = () => {
 
                     
     return (
-        <div className="text-3xl bg-white mt-2 p-4">
-            Todo Read Page Component: tno={tno}
+        <div>
+            <div className="text-3xl font-extrabold text-gray-800 border-b-2 border-gray-200 pb-4 mb-6">
+                Todo Read Page
+            </div>
 
             <ReadComponent tno={tno} />
-            
-            {/* <div onClick={ () => moveToModify(33) }>수정(Modify)</div> */}
-            {/* <div onClick={ ()=> moveToList()}>목록(List)</div> */}
-
         </div>
     )
 }

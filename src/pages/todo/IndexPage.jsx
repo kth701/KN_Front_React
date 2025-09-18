@@ -21,15 +21,17 @@ const IndexPage = () => {
 
     return (
         <BasicLayout>
-            <div className="w-full flex">
-                <div className="text-xl m-1 p-2 w-20 font-extrabold text-center underline"
-                        onClick={handleClickList}>
+            <div className="w-full flex space-x-4 mb-6 border-b-2 border-gray-200 pb-2">
+                <button 
+                    className="py-2 px-5 font-semibold text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-300"
+                    onClick={handleClickList}>
                     LIST
-                </div>
-                <div  className="text-xl m-1 p-2 w-20 font-extrabold text-center underline"
-                        onClick={handleClickAdd}>
+                </button>
+                <button 
+                    className="py-2 px-5 font-semibold text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-300"
+                    onClick={handleClickAdd}>
                     ADD
-                </div>
+                </button>
             </div>
             <div className="w-full flex-wrap">
                 <Outlet />

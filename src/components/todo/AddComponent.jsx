@@ -6,7 +6,6 @@ import { postAdd } from "../../api/TodoApi";
 const initState = {
   title: '',
   writer: '',
-  complete: false,
   dueDate: '' // 'yyyy-MM-dd' 형식의 문자열
 };
 
@@ -28,79 +27,83 @@ const AddComponent = () => {
 
     // 비동기 처리 
     const handleClickAdd =  () => {
-        postAdd(todo).then(result => {
-            // {TNO: 101}
-            setResult(result.TNO)
-            setTodo({...initState})
+        // dueDate가 빈 문자열이면 null로 설정하여 API로 전송
+        const todoData = {...todo, dueDate: todo.dueDate === '' ? null : todo.dueDate};
+        postAdd(todoData).then(data => {
+            setResult({title: '등록 성공', content: 'New '+data.tno+' 등록되었습니다.'});
+            setTodo({...initState});
         })
-        .catch(e => { console.error(e)})
+        .catch(e => { 
+            console.error(e);
+            const errorData = e.response?.data;
+            let errorMsg = '등록에 실패했습니다. 다시 시도해주세요.';
+
+            // if (errorData) {
+            //     if (typeof errorData === 'object') {
+            //         // 유효성 검사 오류 메시지 포맷팅
+            //         errorMsg = Object.entries(errorData).map(([key, value]) => `${key}: ${value}`).join('\n');
+            //     } else {
+            //         errorMsg = errorData.error || errorData;
+            //     }
+            // }
+            setResult({title: '등록 실패', content: errorMsg});
+        })
 
     }
 
     //  모달 닫기 콜백 함수
     const closeModal = () => {
-        // 모달 창 닫을 때 처리 하는 부분
-        setResult(null) // 모달 상태 초기화 하여 닫기
-        moveToList()    // 목록으로 이동
+        const isSuccess = result && result.title.includes('성공');
+        
+        // 모달 상태 초기화
+        setResult(null);
+
+        if (isSuccess) {
+            moveToList(); // 성공 시에만 목록으로 이동
+        }
     }
 
 
     return(
-        <div className="border-2 border-sky-200 mt-10 m-2 p-4">
+        <div className="bg-white rounded-lg shadow-xl p-8 mt-6">
             {/* 모달 처리 */}
             {
                 result && (
-                    <ResultModal 
-                        title={'Add Result'} 
-                        content={`New ${result} Added`} 
-                        callbackFn={closeModal} />
+                    <ResultModal
+                        title={result.title}
+                        content={result.content}
+                        callbackFn={closeModal} 
+                    />
                 )
-
             }
-                
-
-
-            {/* Title */}
-            <div className="flex justify-center">
-                <div className="relative mb-4 flex w-full flex-wrap items-stretch">
-                    <div className="w-1/5 p-6 text-right font-bold">TITLE</div>
-                    <input className="w-4/5 p-6 rounded-r border border-solid border-neutral-300 shadow-md"
-                           name="title" type={'text'} value={todo.title} onChange={handleChangeTodo} />
+            
+            <div className="space-y-6">
+                {/* Title */}
+                <div>
+                    <label className="block text-gray-700 text-sm font-bold mb-2">TITLE</label>
+                    <input className="shadow-sm appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                           name="title" type={'text'} value={todo.title} onChange={handleChangeTodo} placeholder="Enter title" />
                 </div>
-            </div>
-            {/* Writer */}
-            <div className="flex justify-center">
-                <div className="relative mb-4 flex w-full flex-wrap items-stretch">
-                    <div className="w-1/5 p-6 text-right font-bold">WRITER</div>
-                    <input className="w-4/5 p-6 rounded-r border border-solid border-neutral-300 shadow-md"
-                           name="writer" type={'text'} value={todo.writer} onChange={handleChangeTodo} />
+                {/* Writer */}
+                <div>
+                    <label className="block text-gray-700 text-sm font-bold mb-2">WRITER</label>
+                    <input className="shadow-sm appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                           name="writer" type={'text'} value={todo.writer} onChange={handleChangeTodo} placeholder="Enter writer" />
                 </div>
-            </div>
-            {/* DueDate */}
-            <div className="flex justify-center">
-                <div className="relative mb-4 flex w-full flex-wrap items-stretch">
-                    <div className="w-1/5 p-6 text-right font-bold">DUEDATE</div>
-                    <input className="w-4/5 p-6 rounded-r border border-solid border-neutral-300 shadow-md"
+                {/* DueDate */}
+                <div>
+                    <label className="block text-gray-700 text-sm font-bold mb-2">DUE DATE</label>
+                    <input className="shadow-sm appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                            name="dueDate" type={'date'} value={todo.dueDate} onChange={handleChangeTodo} />
                 </div>
             </div>
-            {/* Complete */}
-            <div className="flex justify-center">
-                <div className="relative mb-4 flex w-full flex-wrap items-stretch">
-                    <div className="w-1/5 p-6 text-right font-bold">COMPLETE</div>
-                    <div className="w-4/5 p-6 rounded-r">
-                        완료 <input className="ml-2 w-6 h-6" name="complete" type={'checkbox'} checked={todo.complete} onChange={handleChangeTodo} />
-                    </div>
-                </div>
-            </div>
-            <div className="flex justify-end">
-                <div className="relative mb-4 flex p-4 flex-wrap items-stretch">
-                    <button type="button"
-                            className="rounded p-4 w-36 bg-blue-500 text-xl text-white"
-                            onClick={handleClickAdd}>
-                        ADD
-                    </button>
-                </div>
+
+            <div className="flex justify-end mt-8">
+                <button type="button"
+                        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg focus:outline-none focus:shadow-outline transition-colors duration-300"
+                        onClick={handleClickAdd}>
+                    ADD
+                </button>
             </div>
         </div>
     )

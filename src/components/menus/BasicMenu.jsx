@@ -1,31 +1,33 @@
 import { Link } from "react-router-dom"
 
 const BasicMenu = () => {
-
-    // 네비게이션 구조를 반환
-    return(
-        <>
-            <nav id='navbar' className="flex bg-blue-300 mb-1">
-                <div className="w-4/5 bg-blue-500 text-white">
-                    <ul className="flex p-4 font-bold">
-                        <li className="pr-4 text-2xl">
-                            <Link to="/">Main</Link>
-                        </li>
-                        <li className="pr-4 text-2xl">
-                            <Link to="/about">About</Link>
-                        </li>
-                        <li className="pr-4 text-2xl">
-                             <Link to="/todo/">Todo</Link>
-                        </li>
-
-                    </ul>
+    return (
+        <nav id='navbar' className="container mx-auto max-w-7xl">
+            <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8">
+                {/* Left side: Main Menu */}
+                <ul className="flex items-center space-x-4">
+                    <li>
+                        <Link to="/" className="block py-4 px-2 text-lg font-semibold text-gray-600 hover:text-blue-600 transition-colors duration-300">
+                            Main
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/about" className="block py-4 px-2 text-lg font-semibold text-gray-600 hover:text-blue-600 transition-colors duration-300">
+                            About
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/todo/" className="block py-4 px-2 text-lg font-semibold text-gray-600 hover:text-blue-600 transition-colors duration-300">
+                            Todo
+                        </Link>
+                    </li>
+                </ul>
+                {/* Right side: Login Button */}
+                <div className="flex items-center">
+                    <Link to="/login" className="px-4 py-2 text-lg font-semibold text-white bg-blue-500 rounded-md hover:bg-blue-600 transition-colors duration-300">Login</Link>
                 </div>
-
-                <div className="w-1/5  bg-blue-500 text-white flex justify-center items-center">
-                    <div>Login</div>
-                </div>
-            </nav>
-        </>
+            </div>
+        </nav>
     )
 }
 

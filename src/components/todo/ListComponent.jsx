@@ -34,46 +34,33 @@ const ListComponent = () => {
     },[page, size])
 
     return (
-        <div className="border-2 border-blue-100 mt-10 mr-2 ml-2">
-            <div className="flex flex-wrap mx-auto justify-center p-6">
-                {pageResponseDTO.dtoList.map(todo =>
-                    <div key={todo.tno}
-                         className="w-full min-w-[400px] p-2 m-2 rounded shadow-md hover:bg-sky-100 cursor-pointer"
-                         onClick={() => moveToRead(todo.tno)} // 상세 조회로 이동
-                    >
-                        <div className="flex">
-                            <div className="font-extrabold text-2xl p-2 w-1/12">
-                                {todo.tno}
+        <div className="mt-10">
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+                <ul className="divide-y divide-gray-200">
+                    {pageResponseDTO.dtoList.map(todo =>
+                        <li key={todo.tno}
+                            className="p-5 hover:bg-gray-50 cursor-pointer transition-colors duration-200"
+                            onClick={() => moveToRead(todo.tno)} // 상세 조회로 이동
+                        >
+                            <div className="flex items-center justify-between">
+                                <div className="flex-1 min-w-0">
+                                    <p className="text-sm font-medium text-indigo-600 truncate">
+                                        Task #{todo.tno}
+                                    </p>
+                                    <p className="text-lg font-semibold text-gray-900 mt-1">
+                                        {todo.title}
+                                    </p>
+                                </div>
+                                <div className="ml-4 flex-shrink-0 text-right">
+                                    <p className="text-sm text-gray-500">
+                                        Due: {todo.dueDate}
+                                    </p>
+                                </div>
                             </div>
-                            <div className="text-1xl m-1 p-2 w-8/12 font-extrabold">
-                                {todo.title}
-                            </div>
-                            <div className="text-1xl m-1 p-2 w-2/10 font-medium">
-                                {todo.dueDate}
-                            </div>
-                        </div>
-                    </div>
-                )}
+                        </li>
+                    )}
+                </ul>
             </div>
-
-            {/* 페이지네이션 - 주석 처리
-             <div className="flex justify-center p-4">
-                 <ul className="flex">
-                     {pageResponseDTO.prev &&
-                         <li className="p-2 m-2 cursor-pointer" onClick={() => moveToList({page: pageResponseDTO.prevPage})}> PREV </li>
-                     }
-                     {pageResponseDTO.pageNumList.map(pageNum =>
-                         <li key={pageNum}
-                             className={`p-2 m-2 cursor-pointer ${pageResponseDTO.current === pageNum ? 'text-red-500' : ''}`}
-                             onClick={() => moveToList({page: pageNum})}>
-                             {pageNum}
-                         </li>
-                     )}
-                     {pageResponseDTO.next &&
-                         <li className="p-2 m-2 cursor-pointer" onClick={() => moveToList({page: pageResponseDTO.nextPage})}> NEXT </li>
-                     }
-                 </ul>
-             </div> */}
             <PageComponent serverData={pageResponseDTO} movePage={moveToList}></PageComponent>
         </div>
     )

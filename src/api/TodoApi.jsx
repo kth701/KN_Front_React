@@ -25,9 +25,24 @@ export const getList =  async (pageParam) => {
     return res.data
 }
 
-// 등록
+// 등록: => '/api/v1/todos'  , ''/api/v1/todos/'
 export const postAdd = async(todoObj) => {
     const res = await axios.post(`${base}/`, todoObj)
+    return res.data
+
+}
+
+// 수정
+export const putOne = async(todoObj) => {
+    // tno는 todoObj에 포함되어 있어야 합니다.
+    const res = await axios.put(`${base}/${todoObj.tno}`, todoObj)
+    return res.data
+
+}
+
+// 삭제
+export const deleteOne = async(tno) => {
+    const res = await axios.delete(`${base}/${tno}`)
     return res.data
 
 }

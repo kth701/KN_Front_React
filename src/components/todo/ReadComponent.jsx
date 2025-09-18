@@ -37,41 +37,40 @@ const ReadComponent = ({tno}) =>{
             [tno]) // tno변경될 때, 서버에 요청하는 비동기 처리함수 수행
 
     return ( 
-        <>
-            <div className="border-1 border-sky-200 mt-10 p-4 m-4">
+        <div className="bg-white rounded-lg shadow-xl p-8 mt-6">
+            <div className="space-y-6">
                 {/* 반복되는 태그 생성을 makeDiv()함수에 처리 */}
                 {makeDiv('Tno', todo.tno)}
                 {makeDiv('Title', todo.title)}
                 {makeDiv('Writer', todo.writer)}
                 {makeDiv('DueDate', todo.dueDate)}
+                {makeDiv('Complete', todo.complete ? 'Completed' : 'Not Yet')}
             </div>
 
             {/* List버튼 */}
-            <div className="flex justify-end p-4">
+            <div className="flex justify-end space-x-4 mt-8">
                 <button type="button" 
-                        className="rounded p-4 m-2 text-xl w-32 text-white bg-red-500"
+                        className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg focus:outline-none focus:shadow-outline transition-colors duration-300"
                         onClick={ ()=> moveToList() }>
                     List
                 </button>
 
                 <button type="button" 
-                        className="rounded p-4 m-2 text-xl w-32 text-white bg-blue-500"
+                        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg focus:outline-none focus:shadow-outline transition-colors duration-300"
                         onClick={ ()=> moveToModify(tno) }>
                     Modify
                 </button>
             </div>
-
-        </>
-
+        </div>
     )
 }
 
 
 const makeDiv = (title, value) => 
-    <div className="flelx justify-center">
-        <div className="relative mb-4 flex w-full flex-wrap items-stretch">
-            <div className="w-1/5 p-6 text-right font-bold">{title}</div>
-            <div className="w-4/5 p-6 rounded-r border border-solid shadow-md">{value}</div>
+    <div>
+        <h3 className="text-gray-500 text-sm font-semibold">{title}</h3>
+        <div className="mt-2 p-4 bg-gray-100 rounded-lg text-gray-800 text-lg">
+            {value}
         </div>
     </div>
 export default ReadComponent;
